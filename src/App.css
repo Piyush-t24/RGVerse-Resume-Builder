@@ -1,0 +1,54 @@
+body,
+#root {
+  background-color: #e3f0ff;
+  background-image: repeating-linear-gradient(
+      to bottom,
+      #e3f0ff 0px,
+      #e3f0ff 23px,
+      #b3e0ff 24px,
+      #e3f0ff 25px
+    ),
+    linear-gradient(to right, #ffb6b6 60px, transparent 60px);
+  background-size: 100% 25px, 100% 100%;
+  min-height: 100vh;
+}
+
+.notebook-container {
+  max-width: 1100px;
+  margin: 32px auto;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  background: #fff;
+  border: 2px solid #b3e0ff;
+  display: flex;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .notebook-container {
+    flex-direction: column;
+    max-width: 98vw;
+  }
+}
+
+.resume-header {
+  font-family: "Indie Flower", cursive;
+  font-size: 2.5rem;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  letter-spacing: 1px;
+}
+.resume-subheader {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+.resume-desc {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
