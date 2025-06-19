@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResumeData, Experience, Education, Project, Certification, ExtraCurricular, Award, Achievement } from '../types/Resume';
-import { Plus, Trash2, User, Briefcase, GraduationCap, Code, Languages, FileText, Award as AwardIcon, Trophy, Star, Sparkles } from 'lucide-react';
+import { Plus, Trash2, User, Briefcase, GraduationCap, Code, FileText, Award as AwardIcon, Trophy, Star, Sparkles } from 'lucide-react';
 import { TextEditor } from './TextEditor';
 
 interface ResumeEditorProps {
