@@ -52,19 +52,23 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
   };
 
   return (
-    <div className="h-full bg-white" style={{ fontFamily: 'Nunito, sans-serif' }}>
+    <div
+      className="h-full bg-white"
+      style={{ fontFamily: "Nunito, sans-serif" }}
+      // style={{ fontFamily: "'Computer Modern Serif', serif" }}
+    >
       {/* Export Buttons */}
-      <div className="flex justify-center gap-4 p-4 bg-gradient-to-r from-pink-50 to-purple-50 border-b print:hidden">
+      <div className="flex justify-center gap-4 p-4 bg-green-50 border-b print:hidden">
         <button
           onClick={handleExportPDF}
-          className="flex items-center px-6 py-3 bg-gradient-to-r from-red-400 to-pink-400 text-white rounded-full hover:from-red-500 hover:to-pink-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-bold"
+          className="flex items-center px-4 py-2 lg:px-6 lg:py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-bold text-sm lg:text-base"
         >
           <Download className="w-4 h-4 mr-2" />
           📄 Export PDF
         </button>
         <button
           onClick={handleExportImage}
-          className="flex items-center px-6 py-3 bg-gradient-to-r from-green-400 to-teal-400 text-white rounded-full hover:from-green-500 hover:to-teal-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-bold"
+          className="flex items-center px-4 py-2 lg:px-6 lg:py-3 bg-[#092413] text-white rounded-full hover:bg-green-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-bold text-sm lg:text-base"
         >
           <Image className="w-4 h-4 mr-2" />
           🖼️ Export Image
@@ -76,7 +80,7 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
         {/* Header - Compact */}
         <div className="text-center mb-3">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">
-            {resumeData.personalInfo.fullName || 'Your Name'}
+            {resumeData.personalInfo.fullName || "Your Name"}
           </h1>
           <div className="flex flex-wrap justify-center items-center gap-3 text-xs text-gray-600">
             {resumeData.personalInfo.phone && (
@@ -94,13 +98,13 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
             {resumeData.personalInfo.linkedin && (
               <div className="flex items-center">
                 <Linkedin className="w-3 h-3 mr-1" />
-                {formatUrl(resumeData.personalInfo.linkedin, 'LinkedIn')}
+                {formatUrl(resumeData.personalInfo.linkedin, "LinkedIn")}
               </div>
             )}
             {resumeData.personalInfo.github && (
               <div className="flex items-center">
                 <Github className="w-3 h-3 mr-1" />
-                {formatUrl(resumeData.personalInfo.github, 'GitHub')}
+                {formatUrl(resumeData.personalInfo.github, "GitHub")}
               </div>
             )}
             {resumeData.personalInfo.location && (
@@ -135,7 +139,9 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="font-bold text-xs text-gray-900">
-                      {edu.schoolUrl ? formatUrl(edu.schoolUrl, edu.school) : edu.school}
+                      {edu.schoolUrl
+                        ? formatUrl(edu.schoolUrl, edu.school)
+                        : edu.school}
                     </h3>
                     <p className="text-xs text-gray-700">
                       {edu.degree}
@@ -143,7 +149,9 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
                     </p>
                   </div>
                   <div className="text-right text-xs text-gray-600">
-                    <p>{edu.startDate} - {edu.endDate}</p>
+                    <p>
+                      {edu.startDate} - {edu.endDate}
+                    </p>
                     <p>{edu.location}</p>
                   </div>
                 </div>
@@ -162,24 +170,32 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
               <div key={exp.id} className="mb-2">
                 <div className="flex justify-between items-start mb-1">
                   <div>
-                    <h3 className="font-bold text-xs text-gray-900">{exp.title}</h3>
+                    <h3 className="font-bold text-xs text-gray-900">
+                      {exp.title}
+                    </h3>
                     <p className="text-xs text-gray-700">
-                      {exp.companyUrl ? formatUrl(exp.companyUrl, exp.company) : exp.company}
+                      {exp.companyUrl
+                        ? formatUrl(exp.companyUrl, exp.company)
+                        : exp.company}
                     </p>
                   </div>
                   <div className="text-right text-xs text-gray-600">
-                    <p>{exp.startDate} - {exp.endDate}</p>
+                    <p>
+                      {exp.startDate} - {exp.endDate}
+                    </p>
                     <p>{exp.location}</p>
                   </div>
                 </div>
                 {exp.description.length > 0 && (
                   <ul className="text-xs text-gray-700 space-y-0.5">
-                    {exp.description.filter(desc => desc.trim()).map((desc, index) => (
-                      <li key={index} className="flex">
-                        <span className="mr-1">•</span>
-                        <span>{renderFormattedText(desc)}</span>
-                      </li>
-                    ))}
+                    {exp.description
+                      .filter((desc) => desc.trim())
+                      .map((desc, index) => (
+                        <li key={index} className="flex">
+                          <span className="mr-1">•</span>
+                          <span>{renderFormattedText(desc)}</span>
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>
@@ -198,10 +214,16 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
                 <div className="flex justify-between items-start mb-1">
                   <div>
                     <div className="flex items-center gap-1">
-                      <h3 className="font-bold text-xs text-gray-900">{proj.name}</h3>
+                      <h3 className="font-bold text-xs text-gray-900">
+                        {proj.name}
+                      </h3>
                       {proj.liveUrl && (
-                        <a 
-                          href={proj.liveUrl.startsWith('http') ? proj.liveUrl : `https://${proj.liveUrl}`}
+                        <a
+                          href={
+                            proj.liveUrl.startsWith("http")
+                              ? proj.liveUrl
+                              : `https://${proj.liveUrl}`
+                          }
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-black hover:text-gray-700"
@@ -211,8 +233,12 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
                         </a>
                       )}
                       {proj.githubUrl && (
-                        <a 
-                          href={proj.githubUrl.startsWith('http') ? proj.githubUrl : `https://${proj.githubUrl}`}
+                        <a
+                          href={
+                            proj.githubUrl.startsWith("http")
+                              ? proj.githubUrl
+                              : `https://${proj.githubUrl}`
+                          }
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-600 hover:text-gray-800"
@@ -222,20 +248,26 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
                         </a>
                       )}
                     </div>
-                    <p className="text-xs text-gray-700 italic">{proj.technologies}</p>
+                    <p className="text-xs text-gray-700 italic">
+                      {proj.technologies}
+                    </p>
                   </div>
                   <div className="text-right text-xs text-gray-600">
-                    <p>{proj.startDate} - {proj.endDate}</p>
+                    <p>
+                      {proj.startDate} - {proj.endDate}
+                    </p>
                   </div>
                 </div>
                 {proj.description.length > 0 && (
                   <ul className="text-xs text-gray-700 space-y-0.5">
-                    {proj.description.filter(desc => desc.trim()).map((desc, index) => (
-                      <li key={index} className="flex">
-                        <span className="mr-1">•</span>
-                        <span>{renderFormattedText(desc)}</span>
-                      </li>
-                    ))}
+                    {proj.description
+                      .filter((desc) => desc.trim())
+                      .map((desc, index) => (
+                        <li key={index} className="flex">
+                          <span className="mr-1">•</span>
+                          <span>{renderFormattedText(desc)}</span>
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>
@@ -254,10 +286,14 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="font-bold text-xs text-gray-900">
-                      {cert.credentialUrl ? formatUrl(cert.credentialUrl, cert.name) : cert.name}
+                      {cert.credentialUrl
+                        ? formatUrl(cert.credentialUrl, cert.name)
+                        : cert.name}
                     </h3>
                     <p className="text-xs text-gray-700">
-                      {cert.issuerUrl ? formatUrl(cert.issuerUrl, cert.issuer) : cert.issuer}
+                      {cert.issuerUrl
+                        ? formatUrl(cert.issuerUrl, cert.issuer)
+                        : cert.issuer}
                     </p>
                   </div>
                   <div className="text-right text-xs text-gray-600">
@@ -279,23 +315,34 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
               <div key={activity.id} className="mb-2">
                 <div className="flex justify-between items-start mb-1">
                   <div>
-                    <h3 className="font-bold text-xs text-gray-900">{activity.role} - {activity.activity}</h3>
+                    <h3 className="font-bold text-xs text-gray-900">
+                      {activity.role} - {activity.activity}
+                    </h3>
                     <p className="text-xs text-gray-700">
-                      {activity.organizationUrl ? formatUrl(activity.organizationUrl, activity.organization) : activity.organization}
+                      {activity.organizationUrl
+                        ? formatUrl(
+                            activity.organizationUrl,
+                            activity.organization
+                          )
+                        : activity.organization}
                     </p>
                   </div>
                   <div className="text-right text-xs text-gray-600">
-                    <p>{activity.startDate} - {activity.endDate}</p>
+                    <p>
+                      {activity.startDate} - {activity.endDate}
+                    </p>
                   </div>
                 </div>
                 {activity.description.length > 0 && (
                   <ul className="text-xs text-gray-700 space-y-0.5">
-                    {activity.description.filter(desc => desc.trim()).map((desc, index) => (
-                      <li key={index} className="flex">
-                        <span className="mr-1">•</span>
-                        <span>{renderFormattedText(desc)}</span>
-                      </li>
-                    ))}
+                    {activity.description
+                      .filter((desc) => desc.trim())
+                      .map((desc, index) => (
+                        <li key={index} className="flex">
+                          <span className="mr-1">•</span>
+                          <span>{renderFormattedText(desc)}</span>
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>
@@ -313,12 +360,18 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
               <div key={award.id} className="mb-1">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-bold text-xs text-gray-900">{award.title}</h3>
+                    <h3 className="font-bold text-xs text-gray-900">
+                      {award.title}
+                    </h3>
                     <p className="text-xs text-gray-700">
-                      {award.issuerUrl ? formatUrl(award.issuerUrl, award.issuer) : award.issuer}
+                      {award.issuerUrl
+                        ? formatUrl(award.issuerUrl, award.issuer)
+                        : award.issuer}
                     </p>
                     {award.description && (
-                      <p className="text-xs text-gray-600">{renderFormattedText(award.description)}</p>
+                      <p className="text-xs text-gray-600">
+                        {renderFormattedText(award.description)}
+                      </p>
                     )}
                   </div>
                   <div className="text-right text-xs text-gray-600">
@@ -341,9 +394,13 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="font-bold text-xs text-gray-900">
-                      {achievement.url ? formatUrl(achievement.url, achievement.title) : achievement.title}
+                      {achievement.url
+                        ? formatUrl(achievement.url, achievement.title)
+                        : achievement.title}
                     </h3>
-                    <p className="text-xs text-gray-600">{renderFormattedText(achievement.description)}</p>
+                    <p className="text-xs text-gray-600">
+                      {renderFormattedText(achievement.description)}
+                    </p>
                   </div>
                   <div className="text-right text-xs text-gray-600">
                     <p>{achievement.date}</p>
@@ -366,26 +423,26 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
             <div className="text-xs text-gray-700 space-y-1">
               {resumeData.technicalSkills.languages.length > 0 && (
                 <div>
-                  <span className="font-bold">Languages:</span>{' '}
-                  {resumeData.technicalSkills.languages.join(', ')}
+                  <span className="font-bold">Languages:</span>{" "}
+                  {resumeData.technicalSkills.languages.join(", ")}
                 </div>
               )}
               {resumeData.technicalSkills.frameworks.length > 0 && (
                 <div>
-                  <span className="font-bold">Frameworks:</span>{' '}
-                  {resumeData.technicalSkills.frameworks.join(', ')}
+                  <span className="font-bold">Frameworks:</span>{" "}
+                  {resumeData.technicalSkills.frameworks.join(", ")}
                 </div>
               )}
               {resumeData.technicalSkills.tools.length > 0 && (
                 <div>
-                  <span className="font-bold">Developer Tools:</span>{' '}
-                  {resumeData.technicalSkills.tools.join(', ')}
+                  <span className="font-bold">Developer Tools:</span>{" "}
+                  {resumeData.technicalSkills.tools.join(", ")}
                 </div>
               )}
               {resumeData.technicalSkills.libraries.length > 0 && (
                 <div>
-                  <span className="font-bold">Libraries:</span>{' '}
-                  {resumeData.technicalSkills.libraries.join(', ')}
+                  <span className="font-bold">Libraries:</span>{" "}
+                  {resumeData.technicalSkills.libraries.join(", ")}
                 </div>
               )}
             </div>
@@ -401,9 +458,11 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
             <div className="text-xs text-gray-700">
               {resumeData.languageProficiency.map((lang, index) => (
                 <span key={index}>
-                  {lang.language}{' '}
-                  {'★'.repeat(lang.proficiency)}{'☆'.repeat(5 - lang.proficiency)}
-                  {index < resumeData.languageProficiency.length - 1 ? ', ' : ''}
+                  {lang.language} {"★".repeat(lang.proficiency)}
+                  {"☆".repeat(5 - lang.proficiency)}
+                  {index < resumeData.languageProficiency.length - 1
+                    ? ", "
+                    : ""}
                 </span>
               ))}
             </div>
