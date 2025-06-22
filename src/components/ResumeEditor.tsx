@@ -2,6 +2,23 @@ import React from 'react';
 import { ResumeData, Experience, Education, Project, Certification, ExtraCurricular, Award, Achievement } from '../types/Resume';
 import { Plus, Trash2, User, Briefcase, GraduationCap, Code, FileText, Award as AwardIcon, Trophy, Star, Sparkles } from 'lucide-react';
 import { TextEditor } from './TextEditor';
+import { ArrowLeft } from "lucide-react";
+
+
+const Navbar = () => {
+  return (
+    <nav className="sticky top-0 z-50 w-full border-b border-transparent bg-transparent text-[#092413] shadow-none">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+        <a href="https://rgverse.vercel.app/Home">
+          <button className="flex items-center gap-2 rounded-full border border-[#092413] p-2 transition-colors hover:bg-green-100">
+            <ArrowLeft className="h-5 w-5" />
+            <span className="hidden md:inline">Back</span>
+          </button>
+        </a>
+      </div>
+    </nav>
+  );
+};
 
 interface ResumeEditorProps {
   resumeData: ResumeData;
@@ -306,6 +323,7 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
       className="h-full overflow-y-auto bg-green-50 p-6"
       style={{ fontFamily: "Nunito, sans-serif" }}
     >
+          <Navbar />
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center mb-8">
