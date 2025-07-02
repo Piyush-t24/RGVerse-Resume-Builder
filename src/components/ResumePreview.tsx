@@ -170,7 +170,7 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
                       </h3>
                       <p className="text-xs text-gray-700">
                         {edu.degree}
-                        {edu.gpa && `, GPA: ${edu.gpa}`}
+                        {edu.cgpa && `, CGPA: ${edu.cgpa}`}
                       </p>
                     </div>
                     <div className="text-right text-xs text-gray-600">

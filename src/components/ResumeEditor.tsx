@@ -119,7 +119,7 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
       location: "",
       startDate: "",
       endDate: "",
-      gpa: "",
+      cgpa: "",
     };
     updateResumeData({
       ...resumeData,
@@ -581,13 +581,13 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-green-800 mb-1">
-                      ⭐ GPA
+                      ⭐ CGPA
                     </label>
                     <input
                       type="text"
-                      value={edu.gpa || ""}
+                      value={edu.cgpa || ""}
                       onChange={(e) =>
-                        updateEducation(edu.id, "gpa", e.target.value)
+                        updateEducation(edu.id, "cgpa", e.target.value)
                       }
                       className="w-full p-3 border-2 border-green-200 rounded-2xl focus:border-green-500 focus:outline-none transition-colors hover:shadow-md"
                       placeholder="3.8"

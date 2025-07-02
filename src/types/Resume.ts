@@ -27,7 +27,7 @@ export interface Education {
   location: string;
   startDate: string;
   endDate: string;
-  gpa?: string;
+  cgpa?: string;
 }
 
 export interface Project {

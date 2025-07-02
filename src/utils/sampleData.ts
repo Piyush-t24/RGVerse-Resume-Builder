@@ -21,7 +21,7 @@ export const sampleResumeData: ResumeData = {
       location: "Boston, MA",
       startDate: "Sep 2018",
       endDate: "May 2022",
-      gpa: "3.4",
+      cgpa: "8.4",
     },
   ],
   experiences: [
@@ -86,7 +86,7 @@ export const sampleResumeData: ResumeData = {
       issuer: "Boston University",
       issuerUrl: "https://bu.edu",
       date: "Fall 2020",
-      description: "Achieved GPA of 3.75 or higher for academic excellence",
+      description: "Achieved CGPA of 8.75 or higher for academic excellence",
     },
   ],
   achievements: [
