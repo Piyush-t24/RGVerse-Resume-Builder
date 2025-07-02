@@ -44,7 +44,7 @@ export interface Project {
 export interface Certification {
   id: string;
   name: string;
-  date: string;
+  // date: string;
   credentialUrl?: string;
 }
 
@@ -92,9 +92,9 @@ export interface ResumeData {
     tools: string[];
     libraries: string[];
   };
-  languageProficiency: Array<{
-    language: string;
-    proficiency: number;
-  }>;
+  // languageProficiency: Array<{
+  //   language: string;
+  //   proficiency: number;
+  // }>;
   sectionOrder: string[];
 }
