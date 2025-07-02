@@ -25,6 +25,22 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { TextEditor } from "./TextEditor";
+import { ArrowLeft } from "lucide-react";
+
+const Navbar = () => {
+  return (
+    <nav className="sticky top-0 z-50 w-full border-b border-transparent bg-transparent text-[#092413] shadow-none">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+        <a href="https://rgverse.vercel.app/Home">
+          <button className="flex items-center gap-2 rounded-full border border-[#092413] p-2 transition-colors hover:bg-green-100">
+            <ArrowLeft className="h-5 w-5" />
+            <span className="hidden md:inline">Back</span>
+          </button>
+        </a>
+      </div>
+    </nav>
+  );
+};
 
 interface ResumeEditorProps {
   resumeData: ResumeData;
@@ -205,7 +221,7 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
     const newCertification: Certification = {
       id: Date.now().toString(),
       name: "",
-      date: "",
+      // date: "",
       credentialUrl: "",
     };
     updateResumeData({
@@ -370,6 +386,34 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
       },
     });
   };
+
+  // Add local state for each technical skill field
+  const [languagesInput, setLanguagesInput] = React.useState(
+    resumeData.technicalSkills.languages.join(", ")
+  );
+  const [frameworksInput, setFrameworksInput] = React.useState(
+    resumeData.technicalSkills.frameworks.join(", ")
+  );
+  const [toolsInput, setToolsInput] = React.useState(
+    resumeData.technicalSkills.tools.join(", ")
+  );
+  const [librariesInput, setLibrariesInput] = React.useState(
+    resumeData.technicalSkills.libraries.join(", ")
+  );
+
+  // Sync local state with resumeData when resumeData changes
+  React.useEffect(() => {
+    setLanguagesInput(resumeData.technicalSkills.languages.join(", "));
+  }, [resumeData.technicalSkills.languages]);
+  React.useEffect(() => {
+    setFrameworksInput(resumeData.technicalSkills.frameworks.join(", "));
+  }, [resumeData.technicalSkills.frameworks]);
+  React.useEffect(() => {
+    setToolsInput(resumeData.technicalSkills.tools.join(", "));
+  }, [resumeData.technicalSkills.tools]);
+  React.useEffect(() => {
+    setLibrariesInput(resumeData.technicalSkills.libraries.join(", "));
+  }, [resumeData.technicalSkills.libraries]);
 
   const renderSectionByName = (sectionName: string) => {
     const sectionIndex = resumeData.sectionOrder.indexOf(sectionName);
@@ -888,7 +932,7 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
                   className="px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <Plus className="w-4 h-4 mr-2" />
-                  Add 
+                  Add
                 </button>
                 {sectionControls}
               </div>
@@ -904,7 +948,7 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-green-800 mb-1">
                       🎯 Certification Name
@@ -919,7 +963,7 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
                       placeholder="AWS Certified Solutions Architect"
                     />
                   </div>
-                  <div>
+                  {/* <div>
                     <label className="block text-xs font-bold text-green-800 mb-1">
                       📅 Date
                     </label>
@@ -932,7 +976,7 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
                       className="w-full p-3 border-2 border-green-200 rounded-2xl focus:border-green-500 focus:outline-none transition-colors hover:shadow-md"
                       placeholder="Mar 2021"
                     />
-                  </div>
+                  </div> */}
                   <div className="md:col-span-2">
                     <label className="block text-xs font-bold text-green-800 mb-1">
                       🔗 Credential URL
@@ -1376,9 +1420,10 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
                   💻 Languages
                 </label>
                 <textarea
-                  value={resumeData.technicalSkills.languages.join(", ")}
-                  onChange={(e) =>
-                    updateTechnicalSkills("languages", e.target.value)
+                  value={languagesInput}
+                  onChange={(e) => setLanguagesInput(e.target.value)}
+                  onBlur={() =>
+                    updateTechnicalSkills("languages", languagesInput)
                   }
                   className="w-full p-3 border-2 border-green-200 rounded-2xl focus:border-green-500 focus:outline-none transition-all duration-300 hover:shadow-md resize-none"
                   placeholder="Java, Python, JavaScript, C++"
@@ -1390,9 +1435,10 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
                   🚀 Frameworks
                 </label>
                 <textarea
-                  value={resumeData.technicalSkills.frameworks.join(", ")}
-                  onChange={(e) =>
-                    updateTechnicalSkills("frameworks", e.target.value)
+                  value={frameworksInput}
+                  onChange={(e) => setFrameworksInput(e.target.value)}
+                  onBlur={() =>
+                    updateTechnicalSkills("frameworks", frameworksInput)
                   }
                   className="w-full p-3 border-2 border-green-200 rounded-2xl focus:border-green-500 focus:outline-none transition-all duration-300 hover:shadow-md resize-none"
                   placeholder="React, Node.js, Flask, Django"
@@ -1404,10 +1450,9 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
                   🛠️ Tools
                 </label>
                 <textarea
-                  value={resumeData.technicalSkills.tools.join(", ")}
-                  onChange={(e) =>
-                    updateTechnicalSkills("tools", e.target.value)
-                  }
+                  value={toolsInput}
+                  onChange={(e) => setToolsInput(e.target.value)}
+                  onBlur={() => updateTechnicalSkills("tools", toolsInput)}
                   className="w-full p-3 border-2 border-green-200 rounded-2xl focus:border-green-500 focus:outline-none transition-all duration-300 hover:shadow-md resize-none"
                   placeholder="Git, Docker, VS Code, AWS"
                   rows={2}
@@ -1418,9 +1463,10 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
                   📚 Libraries
                 </label>
                 <textarea
-                  value={resumeData.technicalSkills.libraries.join(", ")}
-                  onChange={(e) =>
-                    updateTechnicalSkills("libraries", e.target.value)
+                  value={librariesInput}
+                  onChange={(e) => setLibrariesInput(e.target.value)}
+                  onBlur={() =>
+                    updateTechnicalSkills("libraries", librariesInput)
                   }
                   className="w-full p-3 border-2 border-green-200 rounded-2xl focus:border-green-500 focus:outline-none transition-all duration-300 hover:shadow-md resize-none"
                   placeholder="pandas, NumPy, Matplotlib, TensorFlow"
@@ -1464,6 +1510,7 @@ export const ResumeEditor: React.FC<ResumeEditorProps> = ({
       className="h-full overflow-y-auto bg-green-50 p-6"
       style={{ fontFamily: "Nunito, sans-serif" }}
     >
+      <Navbar />
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center mb-8">
