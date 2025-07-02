@@ -44,8 +44,6 @@ export interface Project {
 export interface Certification {
   id: string;
   name: string;
-  issuer: string;
-  issuerUrl?: string;
   date: string;
   credentialUrl?: string;
 }
@@ -98,4 +96,5 @@ export interface ResumeData {
     language: string;
     proficiency: number;
   }>;
+  sectionOrder: string[];
 }
