@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { ResumeEditor } from './components/ResumeEditor';
-import { ResumePreview } from './components/ResumePreview';
-import { ResumeData } from './types/Resume';
-import { sampleResumeData } from './utils/sampleData';
+import React, { useState } from "react";
+import { ResumeEditor } from "./components/ResumeEditor";
+import { ResumePreview } from "./components/ResumePreview";
+import { ResumeData } from "./types/Resume";
+import { sampleResumeData } from "./utils/sampleData";
 
 const initialResumeData: ResumeData = {
   personalInfo: {
-    fullName: '',
-    phone: '',
-    email: '',
-    linkedin: '',
-    github: '',
-    twitter: '',
-    location: ''
+    fullName: "",
+    phone: "",
+    email: "",
+    linkedin: "",
+    github: "",
+    twitter: "",
+    location: "",
   },
-  professionalSummary: '',
+  professionalSummary: "",
   education: [],
   experiences: [],
   projects: [],
@@ -26,9 +26,21 @@ const initialResumeData: ResumeData = {
     languages: [],
     frameworks: [],
     tools: [],
-    libraries: []
+    libraries: [],
   },
-  languageProficiency: []
+  languageProficiency: [],
+  sectionOrder: [
+    "professionalSummary",
+    "education",
+    "experiences",
+    "projects",
+    "certifications",
+    "extraCurricular",
+    "awards",
+    "achievements",
+    "technicalSkills",
+    "languageProficiency",
+  ],
 };
 
 function App() {
@@ -43,7 +55,10 @@ function App() {
   };
 
   return (
-    <div className="h-screen flex flex-col lg:flex-row" style={{ fontFamily: 'Nunito, sans-serif' }}>
+    <div
+      className="h-screen flex flex-col lg:flex-row"
+      style={{ fontFamily: "Nunito, sans-serif" }}
+    >
       {/* Left Side - Editor */}
       <div className="w-full lg:w-1/2 h-1/2 lg:h-full">
         <ResumeEditor
