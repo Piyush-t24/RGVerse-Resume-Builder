@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Bold, Italic, Underline, Link } from 'lucide-react';
+import React, { useState, useRef } from "react";
+import { Bold, Italic, Underline, Link } from "lucide-react";
 
 interface TextEditorProps {
   value: string;
@@ -12,11 +12,11 @@ export const TextEditor: React.FC<TextEditorProps> = ({
   value,
   onChange,
   placeholder,
-  className = ''
+  className = "",
 }) => {
   const [showLinkDialog, setShowLinkDialog] = useState(false);
-  const [linkText, setLinkText] = useState('');
-  const [linkUrl, setLinkUrl] = useState('');
+  const [linkText, setLinkText] = useState("");
+  const [linkUrl, setLinkUrl] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const applyFormat = (format: string) => {
@@ -27,26 +27,30 @@ export const TextEditor: React.FC<TextEditorProps> = ({
     const end = textarea.selectionEnd;
     const selectedText = value.substring(start, end);
 
-    let formattedText = '';
+    let formattedText = "";
     switch (format) {
-      case 'bold':
+      case "bold":
         formattedText = `**${selectedText}**`;
         break;
-      case 'italic':
+      case "italic":
         formattedText = `*${selectedText}*`;
         break;
-      case 'underline':
+      case "underline":
         formattedText = `__${selectedText}__`;
         break;
     }
 
-    const newValue = value.substring(0, start) + formattedText + value.substring(end);
+    const newValue =
+      value.substring(0, start) + formattedText + value.substring(end);
     onChange(newValue);
 
     // Restore cursor position
     setTimeout(() => {
       textarea.focus();
-      textarea.setSelectionRange(start + formattedText.length, start + formattedText.length);
+      textarea.setSelectionRange(
+        start + formattedText.length,
+        start + formattedText.length
+      );
     }, 0);
   };
 
@@ -58,8 +62,8 @@ export const TextEditor: React.FC<TextEditorProps> = ({
     const end = textarea.selectionEnd;
     const selectedText = value.substring(start, end);
 
-    setLinkText(selectedText || '');
-    setLinkUrl('');
+    setLinkText(selectedText || "");
+    setLinkUrl("");
     setShowLinkDialog(true);
   };
 
@@ -70,17 +74,21 @@ export const TextEditor: React.FC<TextEditorProps> = ({
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const linkMarkdown = `[${linkText}](${linkUrl})`;
-    
-    const newValue = value.substring(0, start) + linkMarkdown + value.substring(end);
+
+    const newValue =
+      value.substring(0, start) + linkMarkdown + value.substring(end);
     onChange(newValue);
 
     setShowLinkDialog(false);
-    setLinkText('');
-    setLinkUrl('');
+    setLinkText("");
+    setLinkUrl("");
 
     setTimeout(() => {
       textarea.focus();
-      textarea.setSelectionRange(start + linkMarkdown.length, start + linkMarkdown.length);
+      textarea.setSelectionRange(
+        start + linkMarkdown.length,
+        start + linkMarkdown.length
+      );
     }, 0);
   };
 
@@ -89,7 +97,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
       <div className="flex gap-2 mb-2">
         <button
           type="button"
-          onClick={() => applyFormat('bold')}
+          onClick={() => applyFormat("bold")}
           className="p-2 bg-purple-100 hover:bg-purple-200 rounded-lg transition-colors"
           title="Bold"
         >
@@ -97,7 +105,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
         </button>
         <button
           type="button"
-          onClick={() => applyFormat('italic')}
+          onClick={() => applyFormat("italic")}
           className="p-2 bg-purple-100 hover:bg-purple-200 rounded-lg transition-colors"
           title="Italic"
         >
@@ -105,7 +113,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
         </button>
         <button
           type="button"
-          onClick={() => applyFormat('underline')}
+          onClick={() => applyFormat("underline")}
           className="p-2 bg-purple-100 hover:bg-purple-200 rounded-lg transition-colors"
           title="Underline"
         >
@@ -135,7 +143,9 @@ export const TextEditor: React.FC<TextEditorProps> = ({
             <h3 className="text-lg font-bold mb-4">Add Link</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Link Text</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Link Text
+                </label>
                 <input
                   type="text"
                   value={linkText}
@@ -145,7 +155,9 @@ export const TextEditor: React.FC<TextEditorProps> = ({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">URL</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  URL
+                </label>
                 <input
                   type="url"
                   value={linkUrl}
