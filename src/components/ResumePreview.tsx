@@ -16,6 +16,24 @@ interface ResumePreviewProps {
 }
 
 export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
+  // Font switcher state
+  const fontOptions = [
+    { label: "Nunito (Default)", value: "Nunito, sans-serif" },
+    { label: "Computer Modern Roman", value: "'Latin Modern Roman', serif" },
+    { label: "Roboto", value: "Roboto, sans-serif" },
+    { label: "Georgia", value: "Georgia, serif" },
+    { label: "Times New Roman", value: "'Times New Roman', Times, serif" },
+    { label: "Lato", value: "Lato, sans-serif" },
+    { label: "Merriweather", value: "Merriweather, serif" },
+    { label: "Montserrat", value: "Montserrat, sans-serif" },
+  ];
+  const [fontIndex, setFontIndex] = React.useState(0);
+  const selectedFont = fontOptions[fontIndex].value;
+
+  const handleChangeFont = () => {
+    setFontIndex((prev) => (prev + 1) % fontOptions.length);
+  };
+
   const handleExportPDF = () => {
     window.print();
   };
@@ -523,12 +541,9 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
   };
 
   return (
-    <div
-      className="h-full bg-white"
-      style={{ fontFamily: "Nunito, sans-serif" }}
-    >
-      {/* Export Buttons */}
-      <div className="flex justify-center gap-4 p-4 bg-green-50 border-b print:hidden">
+    <div className="h-full bg-white" style={{ fontFamily: selectedFont }}>
+      {/* Export Buttons and Font Switcher */}
+      <div className="flex justify-center gap-4 p-4 bg-green-50 border-b print:hidden items-center">
         <button
           onClick={handleExportPDF}
           className="flex items-center px-4 py-2 lg:px-6 lg:py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-bold text-sm lg:text-base"
@@ -542,6 +557,14 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
         >
           <Image className="w-4 h-4 mr-2" />
           🖼️ Export Image
+        </button>
+        {/* Change Font Button */}
+        <button
+          onClick={handleChangeFont}
+          className="flex items-center px-4 py-2 lg:px-6 lg:py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-bold text-sm lg:text-base"
+          title="Change Font"
+        >
+          Change Font
         </button>
       </div>
 
