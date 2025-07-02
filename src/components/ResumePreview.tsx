@@ -17,107 +17,7 @@ interface ResumePreviewProps {
 
 export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
   const handleExportPDF = () => {
-    // Hide everything except the resume content
-    const body = document.body;
-    const resumeContent = document.querySelector(".print-area");
-
-    if (resumeContent) {
-      // Store original body content
-      const originalContent = body.innerHTML;
-
-      // Create print styles
-      const printStyles = `
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
-          
-          body { 
-            font-family: 'Nunito', sans-serif; 
-            margin: 0; 
-            padding: 20px; 
-            background: white;
-            font-size: 12px;
-            line-height: 1.4;
-            color: #374151;
-          }
-          
-          .print-area { 
-            max-width: none; 
-            margin: 0; 
-            padding: 0; 
-          }
-          
-          .no-underline {
-            text-decoration: none !important;
-          }
-          
-          a {
-            color: #000000 !important;
-            font-weight: 700 !important;
-            text-decoration: none !important;
-          }
-          
-          a:hover {
-            color: #374151 !important;
-          }
-          
-          @media print {
-            body { 
-              margin: 0; 
-              padding: 0; 
-              -webkit-print-color-adjust: exact;
-              print-color-adjust: exact;
-            }
-            .print-area { 
-              padding: 0; 
-              margin: 0;
-            }
-            * {
-              -webkit-print-color-adjust: exact !important;
-              print-color-adjust: exact !important;
-            }
-          }
-          
-          @page {
-            margin: 0.5in;
-            size: A4;
-          }
-        </style>
-      `;
-
-      // Replace body content with just the resume and print styles
-      body.innerHTML =
-        printStyles +
-        '<div class="print-area">' +
-        resumeContent.innerHTML +
-        "</div>";
-
-      // Print
-      window.print();
-
-      // Restore original content after print dialog closes
-      const restoreContent = () => {
-        body.innerHTML = originalContent;
-        // Re-attach event listeners by triggering a re-render
-        window.location.reload();
-      };
-
-      // Listen for print dialog close
-      if (window.matchMedia) {
-        const mediaQueryList = window.matchMedia("print");
-        const handlePrintChange = (
-          mql: MediaQueryList | MediaQueryListEvent
-        ) => {
-          if (!mql.matches) {
-            setTimeout(restoreContent, 100);
-            mediaQueryList.removeListener(handlePrintChange);
-          }
-        };
-        mediaQueryList.addListener(handlePrintChange);
-      } else {
-        // Fallback for older browsers
-        setTimeout(restoreContent, 1000);
-      }
-    }
+    window.print();
   };
 
   const handleExportImage = async () => {
@@ -145,7 +45,7 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
         const icons = clonedElement.querySelectorAll("svg");
         icons.forEach((icon) => {
           icon.style.verticalAlign = "middle";
-          icon.style.marginTop = "-2px";
+          // icon.style.marginTop = "0";
         });
 
         tempContainer.appendChild(clonedElement);
@@ -433,9 +333,9 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
                           : cert.name}
                       </h3>
                     </div>
-                    <div className="text-right text-xs text-gray-600">
+                    {/* <div className="text-right text-xs text-gray-600">
                       <p>{cert.date}</p>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
@@ -595,27 +495,27 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
           )
         );
 
-      case "languageProficiency":
-        return (
-          resumeData.languageProficiency.length > 0 && (
-            <section key="languageProficiency" className="mb-2">
-              <h2 className="text-sm font-bold text-gray-900 mb-1 uppercase tracking-wide border-b border-gray-300 pb-1">
-                Language Proficiency
-              </h2>
-              <div className="text-xs text-gray-700">
-                {resumeData.languageProficiency.map((lang, index) => (
-                  <span key={index}>
-                    {lang.language} {"★".repeat(lang.proficiency)}
-                    {"☆".repeat(5 - lang.proficiency)}
-                    {index < resumeData.languageProficiency.length - 1
-                      ? ", "
-                      : ""}
-                  </span>
-                ))}
-              </div>
-            </section>
-          )
-        );
+      // case "languageProficiency":
+      //   return (
+      //     resumeData.languageProficiency.length > 0 && (
+      //       <section key="languageProficiency" className="mb-2">
+      //         <h2 className="text-sm font-bold text-gray-900 mb-1 uppercase tracking-wide border-b border-gray-300 pb-1">
+      //           Language Proficiency
+      //         </h2>
+      //         <div className="text-xs text-gray-700">
+      //           {resumeData.languageProficiency.map((lang, index) => (
+      //             <span key={index}>
+      //               {lang.language} {"★".repeat(lang.proficiency)}
+      //               {"☆".repeat(5 - lang.proficiency)}
+      //               {index < resumeData.languageProficiency.length - 1
+      //                 ? ", "
+      //                 : ""}
+      //             </span>
+      //           ))}
+      //         </div>
+      //       </section>
+      //     )
+      //   );
 
       default:
         return null;
