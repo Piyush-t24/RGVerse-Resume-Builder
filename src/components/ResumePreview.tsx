@@ -540,6 +540,38 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
     }
   };
 
+  // Auto-scaling font size logic
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const [fontSize, setFontSize] = React.useState(14); // default
+
+  React.useEffect(() => {
+    const adjustFontSize = () => {
+      const minFont = 12;
+      const maxFont = 18;
+      const targetHeight = 1000; // px, approx A4 minus margins
+      if (contentRef.current) {
+        let size = maxFont;
+        contentRef.current.style.fontSize = size + "px";
+        let height = contentRef.current.offsetHeight;
+        // Decrease font size if content is too tall
+        while (height > targetHeight && size > minFont) {
+          size -= 1;
+          contentRef.current.style.fontSize = size + "px";
+          height = contentRef.current.offsetHeight;
+        }
+        // Increase font size if content is much shorter
+        while (height < targetHeight * 0.7 && size < maxFont) {
+          size += 1;
+          contentRef.current.style.fontSize = size + "px";
+          height = contentRef.current.offsetHeight;
+        }
+        setFontSize(size);
+      }
+    };
+    // Timeout to ensure DOM is updated
+    setTimeout(adjustFontSize, 50);
+  }, [resumeData, fontIndex]);
+
   return (
     <div className="h-full bg-white" style={{ fontFamily: selectedFont }}>
       {/* Export Buttons and Font Switcher */}
@@ -569,7 +601,11 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({ resumeData }) => {
       </div>
 
       {/* Resume Content - Optimized for single page */}
-      <div className="p-4 max-w-4xl mx-auto bg-white print:p-2 print:max-w-none print-area text-xs leading-tight">
+      <div
+        ref={contentRef}
+        className="p-4 max-w-4xl mx-auto bg-white print:p-2 print:max-w-none print-area text-xs leading-tight"
+        style={{ fontSize: fontSize + "px" }}
+      >
         {/* Header - Compact */}
         <div className="text-center mb-3">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">
