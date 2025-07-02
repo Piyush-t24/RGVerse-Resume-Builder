@@ -60,7 +60,7 @@ export const sampleResumeData: ResumeData = {
     {
       id: "1",
       name: "AWS Certified Solutions Architect",
-      date: "Mar 2021",
+      // date: "Mar 2021",
       credentialUrl: "https://aws.amazon.com/verification",
     },
   ],
@@ -121,10 +121,10 @@ export const sampleResumeData: ResumeData = {
     ],
     libraries: ["pandas", "NumPy", "Matplotlib"],
   },
-  languageProficiency: [
-    { language: "English", proficiency: 5 },
-    { language: "Hindi", proficiency: 4 },
-  ],
+  // languageProficiency: [
+  //   { language: "English", proficiency: 5 },
+  //   { language: "Hindi", proficiency: 4 },
+  // ],
   sectionOrder: [
     "professionalSummary",
     "education",
